@@ -1,0 +1,31 @@
+{
+  "development": {
+      "config_id": "development",
+      "app_name": "Delilah Restó",
+      "app_desc": "Delilah Restó Project - Acámica",
+      "node_port": 3000,
+      "json_indentation": 4,
+      "database": {
+        "schema": "delilah",
+        "user": "delilah",
+        "password": "1234",
+        "host": "localhost",
+        "dialect": "mysql"
+      }
+  },
+  "testing": {
+      "config_id": "testing",
+      "node_port": 3000,
+      "database": ""
+  },
+  "staging": {
+      "config_id": "staging",
+      "node_port": 8080,
+      "database": ""
+  },
+  "production": {
+      "config_id": "production",
+      "node_port": 443,
+      "database": ""
+  }
+}

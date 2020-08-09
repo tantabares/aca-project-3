@@ -19,6 +19,9 @@
   "homepage": "https://github.com/tantabares/aca-project-3#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "lodash": "^4.17.19",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.4"
   }
 }
