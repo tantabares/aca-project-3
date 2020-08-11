@@ -11,7 +11,9 @@ const server = express();
 server.use(parser.json());
 
 server.get('/test', (req, res) => {
-  return res.status(200).json({ status: 200, message: 'connection ok' });
+  return res
+    .status(200)
+    .json({ message: 'connection ok', data: {} });
 });
 
 server.use('/api/delilah', delilahApi());
