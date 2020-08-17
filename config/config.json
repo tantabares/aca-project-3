@@ -11,6 +11,10 @@
         "password": "1234",
         "host": "localhost",
         "dialect": "mysql"
+      },
+      "jwt": {
+        "key": "xx",
+        "expires": 1000
       }
   },
   "testing": {
