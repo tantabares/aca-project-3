@@ -1,7 +1,8 @@
 const express = require('express');
+const auth = require('./auth');
 const product = require('./controllers/product-controller');
 const user = require('./controllers/user-controller');
-const auth = require('./auth');
+const order = require('./controllers/order-controller');
 
 const delilahApi = () => {
   const router = express.Router();
@@ -35,6 +36,20 @@ const delilahApi = () => {
   router.post('/signin', user.logInUser);
 
   // Order Endpoints
+  router.get(
+    '/orders',
+    auth.validateToken,
+    auth.validateAdmin,
+    order.getOrderAll
+  );
+  router.get('/myorders', auth.validateToken, order.getOrderSelf);
+  router.post('/orders', auth.validateToken, order.createOrder);
+  router.put(
+    '/orders/:id',
+    auth.validateToken,
+    auth.validateAdmin,
+    order.updateOrder
+  );
 
   return router;
 };

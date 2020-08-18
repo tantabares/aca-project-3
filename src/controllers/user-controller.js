@@ -21,7 +21,6 @@ const getUserAll = async (req, res) => {
 const getUserSelf = async (req, res) => {
   try {
     const id = res.decoded.id;
-    console.log(res.decoded);
 
     if (!id) {
       return res.status(400).json({ message: 'invalid' });
