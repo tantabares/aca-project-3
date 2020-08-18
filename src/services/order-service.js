@@ -58,8 +58,7 @@ const getOrderSelf = async (id) => {
 const createOrder = async (user_id, method, products) => {
   const requestCreation = await delilahSql.query(
     `INSERT INTO request (user_id, payment_method)
-      VALUES ('${user_id}', '${method}')
-      WHERE del_flag != 1`,
+      VALUES ('${user_id}', '${method}')`,
     {
       type: delilahSql.QueryTypes.INSERT,
     }
