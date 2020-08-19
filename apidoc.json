@@ -7,16 +7,13 @@
   },
   "servers": [
     {
-      "url": "http://{host}:{port}/api/delilah/{version}",
+      "url": "http://{host}:{port}/api/delilah",
       "variables": {
         "host": {
           "default": "localhost"
         },
         "port": {
           "default": "3000"
-        },
-        "version": {
-          "default": "v1"
         }
       }
     }
