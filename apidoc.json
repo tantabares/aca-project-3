@@ -1,0 +1,986 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Delilah Restó",
+    "description": "Delilah Restó restaurant API documentation by Jhonathan Tabares - Acámica <br><br> This implementation focuses on three entities to simulate a restaurant application, <b>users</b>, <b>products</b> and delivery <b>orders</b>.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:{port}/api/delilah/{version}",
+      "variables": {
+        "host": {
+          "default": "localhost"
+        },
+        "port": {
+          "default": "3000"
+        },
+        "version": {
+          "default": "v1"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "Retrieves all products avaliable",
+        "tags": ["Products"],
+        "description": "Retrieves a list with all avaliable products in the database.",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/product"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a new product",
+        "tags": ["Products", "Admin Only"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "description": "Create a product, only an admin user can create products.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "bearer ey3234uiudsgif7394r734gri3vfawevhdfjkaewbvfghjkdsavhfgjksdf.UguVYKUGVYUKvghJGYU"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "raw/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product-post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "product created: Grilled Cheese"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "401": {
+            "description": "unauthorized OR not an admin"
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "summary": "Retrieves a product based on its id",
+        "tags": ["Products"],
+        "description": "Retrieves only the product with the specified id.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/product"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates or edits a product",
+        "tags": ["Products", "Admin Only"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "description": "Updates a product, only an admin user can edit products.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "bearer ey3234uiudsgif7394r734gri3vfawevhdfjkaewbvfghjkdsavhfgjksdf.UguVYKUGVYUKvghJGYU"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "raw/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product-post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "product updated: Grilled Cheese"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "401": {
+            "description": "unauthorized OR not an admin"
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a product",
+        "tags": ["Products", "Admin Only"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "description": "Deletes a product, only an admin user can delete products.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "bearer ey3234uiudsgif7394r734gri3vfawevhdfjkaewbvfghjkdsavhfgjksdf.UguVYKUGVYUKvghJGYU"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "product with id 5 deleted"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "401": {
+            "description": "unauthorized OR not an admin"
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      }
+    },
+    "/signup": {
+      "post": {
+        "summary": "User registration",
+        "tags": ["Users"],
+        "description": "A new user is created when properly requested.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "raw/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user-signup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "user created: john123"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      }
+    },
+    "/signin": {
+      "post": {
+        "summary": "User login - BEARER TOKEN",
+        "tags": ["Users"],
+        "description": "Logs a user in and a token is retrieved - Both admin and customers should use the same login endpoint. However the token will allow an operation or not, depending on the user privileges.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "raw/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user-signin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/signin"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Retrieves all users information",
+        "tags": ["Users", "Admin Only"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "description": "Retrieves a list with all existing users.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "bearer ey3234uiudsgif7394r734gri3vfawevhdfjkaewbvfghjkdsavhfgjksdf.UguVYKUGVYUKvghJGYU"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/user"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized OR not an admin"
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      }
+    },
+    "/myuser": {
+      "get": {
+        "summary": "Retrieves current user info. - BASED ON LOGGED IN TOKEN",
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "description": "Retrieves the logged in user information.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "bearer ey3234uiudsgif7394r734gri3vfawevhdfjkaewbvfghjkdsavhfgjksdf.UguVYKUGVYUKvghJGYU"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/user"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "summary": "Retrieves all orders information",
+        "tags": ["Orders", "Admin Only"],
+        "description": "Retrieves a list with all orders info. in the database.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "bearer ey3234uiudsgif7394r734gri3vfawevhdfjkaewbvfghjkdsavhfgjksdf.UguVYKUGVYUKvghJGYU"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/order"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized OR not an admin"
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a new order.",
+        "tags": ["Orders"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "description": "Creates an order with the selected products. Payment method can be cash or card",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "bearer ey3234uiudsgif7394r734gri3vfawevhdfjkaewbvfghjkdsavhfgjksdf.UguVYKUGVYUKvghJGYU"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "raw/json": {
+              "schema": {
+                "$ref": "#/components/schemas/order-post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "order created"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      }
+    },
+    "/orders/{id}": {
+      "put": {
+        "summary": "Edits an order based on its id",
+        "tags": ["Orders", "Admin Only"],
+        "description": "Edits the order with the specified id. Status value can be new, cancelled, sent, in_prep, delivered or confirmed.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "bearer ey3234uiudsgif7394r734gri3vfawevhdfjkaewbvfghjkdsavhfgjksdf.UguVYKUGVYUKvghJGYU"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "raw/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "example": "cancelled"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "order 1 updated with new status: cancelled"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "401": {
+            "description": "unauthorized OR not an admin"
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      }
+    },
+    "/myorders": {
+      "get": {
+        "summary": "Retrieves the logged in user orders",
+        "tags": ["Orders"],
+        "description": "Retrieves a list with the current user orders and their details.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "bearer ey3234uiudsgif7394r734gri3vfawevhdfjkaewbvfghjkdsavhfgjksdf.UguVYKUGVYUKvghJGYU"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/order"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Users",
+      "description": "User endpoints"
+    },
+    {
+      "name": "Products",
+      "description": "Product endpoints"
+    },
+    {
+      "name": "Orders",
+      "description": "Order endpoints"
+    },
+    {
+      "name": "Admin Only",
+      "description": "Endpoints that require admin token"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Grilled Cheese"
+          },
+          "description": {
+            "type": "string",
+            "example": "Grilled bread and cheese"
+          },
+          "picture": {
+            "type": "string",
+            "example": "https://www.grilled-cheese-picture-link.com/"
+          },
+          "price": {
+            "type": "number",
+            "example": 299.99
+          },
+          "created": {
+            "type": "string",
+            "example": "2020-08-19T01:29:29.000"
+          },
+          "updated": {
+            "type": "string",
+            "example": "2020-08-19T01:29:29.000"
+          },
+          "del_flag": {
+            "type": "integer",
+            "example": 0
+          }
+        }
+      },
+      "product-post": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Grilled Cheese"
+          },
+          "description": {
+            "type": "string",
+            "example": "Grilled bread and cheese"
+          },
+          "picture": {
+            "type": "string",
+            "example": "https://www.grilled-cheese-picture-link.com/"
+          },
+          "price": {
+            "type": "number",
+            "example": 299.99
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "username": {
+            "type": "string",
+            "example": "john123"
+          },
+          "fullname": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "an@example.email"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          },
+          "phone": {
+            "type": "string",
+            "example": "5555555"
+          },
+          "address": {
+            "type": "string",
+            "example": "Conway Way 1 90210"
+          },
+          "created": {
+            "type": "string",
+            "example": "2020-08-19T01:29:29.000"
+          },
+          "updated": {
+            "type": "string",
+            "example": "2020-08-19T01:29:29.000"
+          },
+          "del_flag": {
+            "type": "integer",
+            "example": 0
+          }
+        }
+      },
+      "user-signup": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "john123"
+          },
+          "fullname": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "an@example.email"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          },
+          "phone": {
+            "type": "string",
+            "example": "5555555"
+          },
+          "address": {
+            "type": "string",
+            "example": "Conway Way 1 90210"
+          }
+        }
+      },
+      "user-signin": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "john123"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        }
+      },
+      "signin": {
+        "type": "object",
+        "properties": {
+          "token_type": {
+            "type": "string",
+            "example": "bearer"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaXNhZG1pbiI6MCwiaWF0IjoxNTk3NzYyNTA1LCJleHAiOjE1OTc3NjM1MDV9.pvIUK-EcRod7gpvujSswIGLb8N2-F0nRMnd3mEqVc24"
+          }
+        }
+      },
+      "order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "payment_method": {
+            "type": "string",
+            "example": "cash"
+          },
+          "status": {
+            "type": "string",
+            "example": "sent"
+          },
+          "total": {
+            "type": "number",
+            "example": 458.98
+          },
+          "username": {
+            "type": "string",
+            "example": "john123"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "amount": {
+                  "type": "number",
+                  "example": 2
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Grilled Cheese"
+                },
+                "price": {
+                  "type": "number",
+                  "example": 330
+                }
+              }
+            }
+          }
+        }
+      },
+      "order-post": {
+        "type": "object",
+        "properties": {
+          "payment_method": {
+            "type": "string",
+            "example": "cash"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "amount": {
+                  "type": "number",
+                  "example": 2
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "responses": {
+      "not-found": {
+        "description": "not-found"
+      }
+    }
+  }
+}

@@ -1,0 +1,413 @@
+{
+  "info": {
+    "_postman_id": "415ff8c6-72f1-4bca-a3dc-804210dbf285",
+    "name": "Acamica",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Delilah",
+      "item": [
+        {
+          "name": "Products",
+          "item": [
+            {
+              "name": "Products ALL",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "localhost:3000/api/delilah/products",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "products"]
+                },
+                "description": "Request to get All Products in Delilah Restó"
+              },
+              "response": []
+            },
+            {
+              "name": "Product",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "localhost:3000/api/delilah/products/4",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "products", "4"]
+                },
+                "description": "Get a product with its id."
+              },
+              "response": []
+            },
+            {
+              "name": "Product",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaXNhZG1pbiI6MCwiaWF0IjoxNTk3NzYxNzg3LCJleHAiOjE1OTc3NjI3ODd9.kXIfvlPkt2AY0WgjSCIVgcC9y1Xj8x2MGbcYoVJvPJA",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"Carnita\",\n    \"description\": \"Solo Carnita :3\",\n    \"picture\": \"Imagen de Carnita\",\n    \"price\": 299.99\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:3000/api/delilah/products",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "products"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Product",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaXNhZG1pbiI6MCwiaWF0IjoxNTk3NzYxNzg3LCJleHAiOjE1OTc3NjI3ODd9.kXIfvlPkt2AY0WgjSCIVgcC9y1Xj8x2MGbcYoVJvPJA",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"Arrocito\",\n    \"description\": \"Solo Arroz\",\n    \"picture\": \"Imagen de Arroz\",\n    \"price\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:3000/api/delilah/products/4",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "products", "4"]
+                },
+                "description": "Updates Product with id"
+              },
+              "response": []
+            },
+            {
+              "name": "Product",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaXNhZG1pbiI6MSwiaWF0IjoxNTk3NzYxODQwLCJleHAiOjE1OTc3NjI4NDB9.gKJNRvb8EUPg0a1Trhu4MmVMlq8gtVQlyUqnbgqgds8",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "localhost:3000/api/delilah/products/4",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "products", "4"]
+                },
+                "description": "Delete a product"
+              },
+              "response": []
+            }
+          ],
+          "protocolProfileBehavior": {},
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "My User (not Admin)",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaXNhZG1pbiI6MCwiaWF0IjoxNTk3NzYxOTM1LCJleHAiOjE1OTc3NjI5MzV9.cLhK5N0pv6tkwm3dJ46YbbZuenTFgsqKHAwlMhwgVWY",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "localhost:3000/api/delilah/myuser",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "myuser"]
+                },
+                "description": "Retrieve own user info"
+              },
+              "response": []
+            },
+            {
+              "name": "Users ALL",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaXNhZG1pbiI6MCwiaWF0IjoxNTk3NzYxOTM1LCJleHAiOjE1OTc3NjI5MzV9.cLhK5N0pv6tkwm3dJ46YbbZuenTFgsqKHAwlMhwgVWY",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "localhost:3000/api/delilah/users",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "users"]
+                },
+                "description": "Get all -non admin- users"
+              },
+              "response": []
+            },
+            {
+              "name": "Sign Up",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"username\": \"juanito5\",\n    \"fullname\": \"Johnny Doe\",\n    \"email\": \"an+3@email.com\",\n    \"password\": \"1234\",\n    \"phone\": \"3334989\",\n    \"address\": \"Cr 44 # 45 - 40\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:3000/api/delilah/signup",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "signup"]
+                },
+                "description": "Add an user"
+              },
+              "response": []
+            },
+            {
+              "name": "Login",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"username\": \"juanito5\",\n    \"password\": \"1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:3000/api/delilah/signin",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "signin"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login ADMIN",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:3000/api/delilah//signin",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "", "signin"]
+                }
+              },
+              "response": []
+            }
+          ],
+          "protocolProfileBehavior": {},
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "Orders",
+          "item": [
+            {
+              "name": "Orders ALL",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaXNhZG1pbiI6MSwiaWF0IjoxNTk3NzYyNDg0LCJleHAiOjE1OTc3NjM0ODR9._WYFP6HlI31u_t4j3rOu3HBne4rEMA3q-fN3ZLe8GY0",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "localhost:3000/api/delilah/orders",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "orders"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "My Orders",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaXNhZG1pbiI6MCwiaWF0IjoxNTk3NzYyNTA1LCJleHAiOjE1OTc3NjM1MDV9.pvIUK-EcRod7gpvujSswIGLb8N2-F0nRMnd3mEqVc24",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "localhost:3000/api/delilah/myorders",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "myorders"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Order",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaXNhZG1pbiI6MCwiaWF0IjoxNTk3NzYyNTA1LCJleHAiOjE1OTc3NjM1MDV9.pvIUK-EcRod7gpvujSswIGLb8N2-F0nRMnd3mEqVc24",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"payment_method\": \"cash\",\n    \"items\": [\n        {\n            \"id\": 1,\n            \"amount\": 1\n        },\n        {\n            \"id\": 2,\n            \"amount\": 1\n        }\n    ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:3000/api/delilah/orders",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "orders"]
+                },
+                "description": "reate an order"
+              },
+              "response": []
+            },
+            {
+              "name": "Order",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaXNhZG1pbiI6MSwiaWF0IjoxNTk3NzYyODQwLCJleHAiOjE1OTc3NjM4NDB9.BQhy7MB1Ni8g63sKSu_kigw1E5bLc2QDOGj4y7UxE0I",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"status\": \"cancelled\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:3000/api/delilah/orders/1",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "delilah", "orders", "1"]
+                },
+                "description": "reate an order"
+              },
+              "response": []
+            }
+          ],
+          "protocolProfileBehavior": {},
+          "_postman_isSubFolder": true
+        }
+      ],
+      "protocolProfileBehavior": {}
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "7404807d-e127-483a-9530-ad427a9bbec1",
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "f93ea553-9d6c-4b9c-b48d-14a4ec27b617",
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
