@@ -50,6 +50,12 @@ const delilahApi = () => {
     auth.validateAdmin,
     order.updateOrder
   );
+  router.delete(
+    '/orders/:id',
+    auth.validateToken,
+    auth.validateAdmin,
+    order.deleteOrder
+  );
 
   return router;
 };

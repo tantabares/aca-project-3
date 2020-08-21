@@ -658,6 +658,63 @@
             "$ref": "#/components/responses/not-found"
           }
         }
+      },
+      "delete": {
+        "summary": "Deletes an order",
+        "tags": ["Orders", "Admin Only"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "description": "Deletes an order, only an admin user can delete orders.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "bearer ey3234uiudsgif7394r734gri3vfawevhdfjkaewbvfghjkdsavhfgjksdf.UguVYKUGVYUKvghJGYU"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "order with id 5 deleted"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "401": {
+            "description": "unauthorized OR not an admin"
+          },
+          "404": {
+            "$ref": "#/components/responses/not-found"
+          }
+        }
       }
     },
     "/myorders": {

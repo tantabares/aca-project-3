@@ -89,10 +89,22 @@ const updateOrder = async (id, status) => {
   );
 };
 
+const deleteOrder = async (id) => {
+  return await delilahSql.query(
+    `UPDATE request
+      SET del_flag = 1
+      WHERE id = ${id}`,
+    {
+      type: delilahSql.QueryTypes.UPDATE,
+    }
+  );
+}
+
 module.exports = {
   getOrderAll,
   getOrderSelf,
   getOrder,
   createOrder,
   updateOrder,
+  deleteOrder,
 };

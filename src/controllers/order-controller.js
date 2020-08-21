@@ -109,6 +109,22 @@ const updateOrder = async (req, res) => {
   }
 };
 
+const deleteOrder = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!id) {
+      return res.status(400).json({ message: 'bad-request: no id provided' });
+    }
+
+    await service.deleteOrder(id);
+
+    return res.status(200).json({ message: `order with id ${id} deleted` });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+};
+
 const transform = (data) => {
   data.forEach((item) => {
     item.items = [];
@@ -172,4 +188,5 @@ module.exports = {
   getOrderSelf,
   createOrder,
   updateOrder,
+  deleteOrder,
 };
